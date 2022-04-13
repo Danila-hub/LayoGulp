@@ -1,0 +1,27 @@
+body {
+    background-color: #000000;
+    color: #ffffff;
+
+}
+
+@media screen and (max-width: 900px){
+    body {
+        background-color: blue;
+    }
+}
+@media screen and (max-width: 600px){
+    body {
+        background-color: rgb(26, 216, 42);
+    }
+}
+@media screen and (max-width: 1000px){
+    body {
+        background-color: maroon;
+    }
+}
+
+.hfdi {
+    @media screen and (max-width: 900px){
+        background-color: #ffffff;
+    }
+}
