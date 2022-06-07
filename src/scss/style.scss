@@ -1,2 +1,7 @@
-@import "null";
-@import "fonts";
+@import 'null';
+@import 'fonts';
+
+@import 'parts/base';
+@import 'parts/header';
+@import 'parts/main';
+@import 'parts/footer';
