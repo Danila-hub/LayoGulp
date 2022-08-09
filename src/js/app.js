@@ -424,10 +424,6 @@
 // Для заголовка добавляется класс _active
 
 //popup
-//import * as flsFunctions from "./modules/functions.js";
-//flsFunctions.thisTest();
-
-//popup
 // for popup link add class popup-link
 // for popup close icon add class close-popup
 // add lock-padding class to fixed objects
@@ -539,3 +535,56 @@
 //     popupClose(popupActive);
 //   }
 // });
+
+// Animation to show elements
+
+//class for all animated items: _anim-items
+//If you need to delay the animation, you can set the delay in css or with setTimeout
+// For animated item will add class _active
+// _anim-no-hide if emelemt have this class, element won't won't fade for animation
+// const animItems = document.querySelectorAll('._anim-items');
+
+// if (animItems.length > 0) {
+//   window.addEventListener('scroll', animOnScroll);
+
+//   function animOnScroll() {
+//     for (let index = 0; index < animItems.length; index++) {
+//       const animItem = animItems[index];
+//       const animItemHeight = animItem.offsetHeight;
+//       const animItemOffset = offset(animItem).top;
+//       const animStart = 4;
+
+//       let animItemPoint = window.innerHeight - animItemHeight / animStart;
+
+//       if (animItemHeight > window.innerHeight) {
+//         animItemPoint = window.innerHeight - animItemHeight / animStart;
+//       }
+
+//       if (
+//         pageYOffset > animItemOffset - animItemPoint &&
+//         pageYOffset < animItemOffset + animItemHeight
+//       ) {
+//         animItem.classList.add('_active');
+//       } else {
+//         if (!animItem.classList.contains('_anim-no-hide')) {
+//           animItem.classList.remove('_active');
+//         }
+//       }
+//     }
+//   }
+
+//   function offset(el) {
+//     const rect = el.getBoundingClientRect(),
+//       scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+//       scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+//     return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
+//   }
+
+//   //Right now animation start type:
+//   // animOnScroll();
+
+//   //Delay start animation type:
+//   setTimeout(() => {
+//     animOnScroll();
+//   }, 1000);
+// }
