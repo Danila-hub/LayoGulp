@@ -1,1 +1,112 @@
 //mixins
+@mixin adpv(
+  //Property for which the value will be set.
+  $property,
+  //mixin method. (More on that below),
+  $method: 1,
+  //Max value for property.
+  $startValue: 20,
+  //Min value for property.
+  $endValue: 14,
+  //The maximum width value at which the mixin will work.
+  $maxWidth: $container-mod,
+
+  //The minimum width value at which the mixin will work.
+  $minWidth: 320
+) {
+  //========================================================================================
+  // METHODS FOR CONTAINER SIZE
+  //========================================================================================
+  //[1] =====
+  //The value of a property does not increase or decrease if:
+  //The display width more than the maximum width ($maxWidth) (default: container size)
+  //The display width less than the minimum width value. ($minWidth)
+  //[2] =====
+  //The value of a property does not decrease if:
+  //The Screen width less than the minimum width value. ($minWidth)
+  //The value of a property does change if:
+  //The Screen width less or more than the maximum width value. ($maxWidth) (default: container size)
+  //[3] =====
+  //The value of a property does not decrease if:
+  //The Screen width less than maximum width ($maxWidth) (default: container size)
+  //The value of a property does increase if:
+  //The Screen width more than maximum width ($maxWidth) (default: container size)
+  //In this case, the minimum value corresponds to the specified variable $startValue.
+  //========================================================================================
+  // METHODS FOR LAYOUT SIZE
+  //========================================================================================
+  //[4] =====
+  //The value of a property does not increase or decrease if:
+  //The display width more than the layout size. ($layout-size) (default: container size)
+  //The display width less than the minimum width value. ($minWidth)
+  //[5] =====
+  //The value of a property does not decrease if:
+  //The Screen width less than the minimum width value. ($minWidth)
+  //The value of a property does change if:
+  //The Screen width less or more than the layout size. ($layout-size) (default: container size)
+  //[6] =====
+  //The value of a property does not decrease if:
+  //The Screen width less than the layout size. ($layout-size) (default: container size)
+  //The value of a property does increase if:
+  //The Screen width more than the layout size. ($layout-size) (default: container size)
+  //In this case, the minimum value corresponds to the specified variable $startValue.
+  //========================================================================================
+  // END METHODS LIST
+  //========================================================================================
+  #{$property}: $startValue + px;
+  $addSize: $startValue - $endValue;
+
+  //[1] - METHOD
+  @if $method==1 {
+    @media (max-width: #{$maxWidth + px}) {
+      #{$property}: calc(
+        #{$endValue + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$maxWidth - $minWidth})
+      );
+    }
+    @media (max-width: #{$minWidth + px}) {
+      #{$property}: #{$endValue + px};
+    }
+  }
+  //[2] - METHOD
+  @else if $method==2 {
+    #{$property}: calc(
+      #{$endValue + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$maxWidth - $minWidth})
+    );
+    @media (max-width: #{$minWidth + px}) {
+      #{$property}: #{$endValue + px};
+    }
+  }
+  //[3] - METHOD
+  @else if $method==3 {
+    @media (min-width: #{$maxWidth + px}) {
+      #{$property}: calc(#{$endValue + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+    }
+  }
+
+  //[4] - METHOD
+  @else if $method==4 {
+    @media (max-width: #{$layout-size + px}) {
+      #{$property}: calc(
+        #{$endValue + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$layout-size - $minWidth})
+      );
+    }
+    @media (max-width: #{$minWidth + px}) {
+      #{$property}: #{$endValue + px};
+    }
+  }
+  //[5] - METHOD
+  @else if $method==5 {
+    #{$property}: calc(
+      #{$endValue + px} + #{$addSize} * ((100vw - #{$minWidth + px}) / #{$layout-size - $minWidth})
+    );
+    @media (max-width: #{$minWidth + px}) {
+      #{$property}: #{$endValue + px};
+    }
+  }
+  //[6] - METHOD
+  @else if $method==6 {
+    @media (min-width: #{$layout-size + px}) {
+      #{$property}: calc(#{$endValue + px} + #{$addSize} * ((100vw - 320px) / #{$layout-size - 320}));
+    }
+  }
+}
